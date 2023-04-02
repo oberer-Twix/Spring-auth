@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Overview</title>
+    <link rel="stylesheet" href="/style.css" type="text/css">
+</head>
+<body>
+<div class="header">
+    <h2 th:text="${name}" class="text-center"/>
+    <h1 class="text-center">Overview</h1>
+    <div>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit">Abmeldeformular -&gt</button>
+        </form>
+    </div>
+</div>
+<div class="main-content">
+  <h1>Overview</h1>
+    <div th:each="question: ${questions}" class="question">
+        <h3 th:text="${question.titel}" class="title"/>
+        <p th:text="${question.ablaufdatum}"/>
+        <a th:href="@{/question/{questionID} (questionID = ${question.id})}">Frage Beantworten</a>
+    </div>
+    <div th:if="${questions.isEmpty()}">
+        <h4>Es sind derzeit keine Fragen offen</h4>
+    </div>
+</div>
+
+</body>
+</html>

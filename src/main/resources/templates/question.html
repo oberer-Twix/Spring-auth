@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Frage</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="header">
+    <h2 th:text="${name}" class="text-center"/>
+    <h1 class="text-center">Frage <span th:text="${frage.getTitel()}"></span></h1>
+    <div>
+        <a href="/overview">zur Übersicht</a>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit">Abmeldeformular -&gt</button>
+        </form>
+    </div>
+</div>
+<div class="main-content">
+    <div style="display: flex; justify-content: space-between">
+        <h1 th:text="${frage.titel}"></h1>
+        <p th:text="${frage.ablaufdatum}"></p>
+    </div>
+    <h2 th:text="${frage.question}"></h2>
+
+    <form method="post" th:action="@{/answer/{fragenID} (fragenID = ${frage.getId()})}">
+        <fieldset>
+            <legend>Antworten</legend>
+            <label th:each="antwortMoeglichkeit: ${antwortMoeglichkeiten}">
+                <span th:text="${antwortMoeglichkeit}"></span>
+                <input type="radio" th:value="${antwortMoeglichkeit}" th:field="${antwort.clientAntwort}">
+            </label>
+        </fieldset>
+        <button type="submit">Absenden</button>
+    </form>
+
+
+</div>
+</body>
+</html>

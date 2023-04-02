@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="header">
+    <h2 th:text="${name}" class="text-center"></h2>
+    <h1 class="text-center">Frage hinzufügen</h1>
+    <div>
+        <a href="/overview">zur Übersicht</a>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit">Abmeldeformular -&gt</button>
+        </form>
+    </div>
+</div>
+<div class="main-content center">
+    <form th:action="@{/admin/add-question}"
+          method="post" th:object="${frage}">
+        <label>
+            Titel:
+            <input type="text" value="" th:field="${frage.titel}" required>
+        </label>
+        <label>
+            Frage:
+            <input type="text" value="" th:field="${frage.question}" required>
+        </label>
+        <label>
+            Ablaufdatum:
+            <input type="date" value="" th:field="${frage.ablaufdatum}" required th:min="${today}">
+        </label>
+        <input type="submit" value="Anlegen" class="w-100">
+    </form>
+</div>
+</body>
+</html>

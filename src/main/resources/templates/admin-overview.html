@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin-Overview</title>
+    <link rel="stylesheet" href="/style.css" type="text/css">
+</head>
+<body>
+<div class="header">
+    <h2 th:text="${name}" class="text-center"/>
+    <h1 class="text-center">Admin-Overview</h1>
+    <div>
+        <a href="/admin">Neue Frage +</a>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit">Abmeldeformular -&gt</button>
+        </form>
+    </div>
+</div>
+<div class="main-content">
+    <div>
+        <div th:each="question: ${questions.entrySet()}" class="question">
+            <h3><b>Titel: </b> <span th:text="${question.getKey().getTitel()}"></span></h3>
+            <h4><b>Frage: </b><span th:text="${question.getKey().getQuestion()}"></span></h4>
+            <p><b>Ablaufdatum: </b><span th:text="${question.getKey().getAblaufdatum()}"></span></p>
+
+            <code><b>Beantwortet von: </b><span  th:text="${question.getValue().size()}"></span></code>
+            <a th:href="@{/question/{fragenID} (fragenID = ${question.getKey().getId()})}">Details</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

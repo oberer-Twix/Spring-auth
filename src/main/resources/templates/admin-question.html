@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Fragen-Details</title>
+    <link rel="stylesheet" href="/style.css" type="text/css">
+</head>
+<body>
+<div class="header">
+    <h2 th:text="${name}" class="text-center"/>
+    <h1 class="text-center">Frage <span th:text="${frage.getTitel()}"></span></h1>
+    <div>
+        <a href="/overview">zur Übersicht</a>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit">Abmeldeformular -&gt</button>
+        </form>
+    </div>
+</div>
+<div class="main-content">
+    <h2 th:text="${frage.getQuestion()}"></h2>
+    <h4><b>Ablaufdatum: </b><span th:text="${frage.getAblaufdatum()}"></span></h4>
+
+    <div th:each="antwort: ${antworten.entrySet()}">
+        <h3 th:text="${antwort.getKey()}"></h3>
+        <div th:each="answer: ${antwort.getValue()}" class="answer">
+            <h3 th:text="${answer.client.getEmail()}"></h3>
+        </div>
+        <div th:if="${antwort.getValue().isEmpty()}" class="answer">
+            <p>Keine Bewertung mit dieser Antwort</p>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

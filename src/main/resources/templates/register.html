@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="main-content center">
+    <h1>Register</h1>
+    <form th:action="@{/register}"
+          method="POST" th:object="${registerDTO}">
+        <label class="wide-label">
+            E-Mail:
+            <input type="email" value="" th:field="*{email}" required>
+        </label>
+        <label class="wide-label">
+            Passwort:
+            <input type="password" value="" th:field="*{password}" required>
+        </label>
+        <label class="wide-label">
+            Repeat Password
+            <input type="password" value="" th:field="${registerDTO.repeatPassword}" required>
+        </label>
+        <button type="submit" class="w-100">Registrieren</button>
+    </form>
+</div>
+</body>
+</html>
